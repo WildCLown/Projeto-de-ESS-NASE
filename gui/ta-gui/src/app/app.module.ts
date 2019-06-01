@@ -7,11 +7,13 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AtividadeEmCampoComponent } from './atividadeEmCampo.component';
 import { AtividadeEmCampoService } from './atividadeEmCampo.service';
+import { AtendimentoComponent } from './Atendimento.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AtividadeEmCampoComponent
+    AtividadeEmCampoComponent,
+    AtendimentoComponent
   ],
   imports: [
     BrowserModule,
@@ -21,6 +23,10 @@ import { AtividadeEmCampoService } from './atividadeEmCampo.service';
       {
         path: 'atividadeEmCampo',
         component: AtividadeEmCampoComponent
+      },
+      {
+          path: 'Atendimento',
+          component: AtendimentoComponent
       }
     ])
   ],
