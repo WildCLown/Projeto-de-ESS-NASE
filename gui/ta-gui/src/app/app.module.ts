@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AtividadeEmCampoComponent } from './atividadeEmCampo.component';
 import { AtividadeEmCampoService } from './atividadeEmCampo.service';
-import { AtendimentoComponent } from './Atendimento.component';
+import { AtendimentoComponent } from './Atendimento/Atendimento.component';
 
 @NgModule({
   declarations: [

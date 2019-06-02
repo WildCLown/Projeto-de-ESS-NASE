@@ -1,0 +1,77 @@
+<html (mousemove)="onMove()">
+
+
+<h3>
+    Aluno:
+</h3>
+<button>
+    Buscar aluno existente
+</button>
+
+<table>
+<tr>
+   <td><label>Nome </label></td>
+   <!-- <td><input [(ngModel)]="aluno.nome" name="namebox"></td>
+   <td><button (click)="criarAluno(aluno)">Adicionar</button></td> -->
+</tr>
+<tr>
+    <td><label>Curso </label></td>
+    <!-- <td><input [(ngModel)]="aluno.nome" name="namebox"></td> -->
+    <td>
+        <select name="cursos">
+            <option value="padrao">Selecione o curso</option>
+        </select>
+
+    </td>
+ </tr>
+<tr>
+   <td><label>CPF </label></td>
+   <!-- <td><input [(ngModel)]="aluno.cpf" name="cpfbox"></td> -->
+</tr>
+<tr>
+    <td><label>Gênero </label></td>
+    <!-- <td><input [(ngModel)]="aluno.genero" ></td> -->
+ </tr>
+<tr>
+   <td><label>Telefone </label></td>
+   <!-- <td><input [(ngModel)]="aluno.telefone" ></td> -->
+</tr>
+<tr>
+    <td><label>Profissional </label></td>
+    <select name=profissionais>
+        <option value="padrao">
+            Selecione o profissional
+        </option>
+    </select>
+</tr>
+<tr>
+    <td><label>Status </label></td>
+    <!-- <td><input [(ngModel)]="aluno.Status" ></td> -->
+ </tr>
+ <tr>
+    <td><label>Tipo de atendimento </label></td>
+    <!-- <td><input [(ngModel)]="aluno.tipoAtendimento" ></td> -->
+ </tr>
+<tr>
+   <td><label>Especialidade </label></td>
+   <!-- <td><input [(ngModel)]="profissional.especialidade" ></td> -->
+</tr>
+</table>
+
+<!-- <table>
+<tr *ngIf="alunos.length > 0">
+   <th>Nome</th>
+   <th>CPF</th>
+   <th>e-mail</th>
+   <th>GitHub</th>
+</tr>
+<tr *ngFor="let a of alunos" name="alunolist">
+   <td name="nomelist">{{a.nome}}</td>
+   <td name="cpflist">{{a.cpf}}</td>
+   <td>{{a.email}}</td>
+   <td>{{a.git}}</td>
+   <td><button (click)="removerAluno(a)">Remover</button></td>
+</tr>
+</table> -->
+
+</html>
