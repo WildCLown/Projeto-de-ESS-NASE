@@ -1,9 +1,6 @@
 export class Profissional {
     nome: string;
-    curso: string;
-    cpf: string;
-    genero: boolean;
-    telefone: string;
+    especialidade: string;
  
     constructor() {
       this.clean();
@@ -11,10 +8,7 @@ export class Profissional {
   
     clean(): void {
       this.nome = "";
-      this.cpf = "";
-      this.curso = "";
-      this.telefone= "";
-      this.genero = null;
+      this.especialidade = "";
     }
   
   }
