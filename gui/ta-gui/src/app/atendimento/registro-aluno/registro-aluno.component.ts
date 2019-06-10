@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Aluno } from '../aluno';
+import { Profissional } from '../profissional'
 
 @Component({
   selector: 'app-registro-aluno',

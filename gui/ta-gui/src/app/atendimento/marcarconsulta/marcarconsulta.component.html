@@ -1,3 +1,57 @@
-<p>
-  marcarconsulta works!
-</p>
+<html (mousemove)="onMove()">
+
+
+<h3>
+    Nova Consulta:
+</h3>
+
+<table>
+<tr>
+    <td><label>Aluno </label></td>
+    <td>
+        <select name="cursos">
+            <option value="padrao">Selecione o aluno</option>
+        </select>
+
+    </td>
+ </tr>
+<tr>
+    <td><label>Profissional </label></td>
+    <select name=profissionais>
+        <option value="padrao">
+            Selecione o profissional
+        </option>
+    </select>
+</tr>
+<tr>
+    <td><label>Data </label></td>
+    <select name=profissionais>
+        <option value="padrao">
+            mês
+        </option>
+    </select>
+    <select name=profissionais>
+        <option value="padrao">
+            dia
+        </option>
+    </select>
+</tr>
+<tr>
+    <td><label>Horário </label></td>
+    <select name=profissionais>
+        <option value="padrao">
+            hora
+        </option>
+    </select>
+    <select name=profissionais>
+        <option value="padrao">
+            minuto
+        </option>
+    </select>
+</tr>
+<tr>
+    <td><button (click)="criarAluno(aluno)">Marcar</button></td>
+</tr>
+</table>
+
+</html>
