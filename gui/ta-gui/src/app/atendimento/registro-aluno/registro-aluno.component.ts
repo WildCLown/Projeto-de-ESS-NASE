@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Aluno } from '../aluno';
-import { Profissional } from '../profissional'
+import { AlunoProfissional } from '../alunoProfissional'
+import { AlunoProfissionalService } from '../alunoProfissional.service'
 
 @Component({
   selector: 'app-registro-aluno',
@@ -9,9 +9,26 @@ import { Profissional } from '../profissional'
 })
 export class RegistroAlunoComponent implements OnInit {
 
-  constructor() { }
+    constructor(private aps: AlunoProfissionalService) { }
 
-  ngOnInit() {
-  }
+    alunoProfissional: AlunoProfissional = new AlunoProfissional();
+    alunosProfissionais: AlunoProfissional[];
+    mostraLista: boolean = false;
+
+    criarAlunoProfissional(ap: AlunoProfissional): void {
+        this.aps.criar(ap).then( aptemp => {
+            this.alunosProfissionais.push(aptemp);
+        })
+        .catch(erro => alert(erro))
+    }
+
+    mostrarLista() {
+        this.mostraLista = true;
+    }
+
+    preencher() {}
+    
+    ngOnInit() {
+    }
 
 }

@@ -14,7 +14,7 @@ export class AlunoProfissional {
     clean(): void {
         this.aluno = new Aluno();
         this.profissional = new Profissional();
-        status = "";
+        this.status = "";
         this.tipoAtendimento = "";
     }
 }
