@@ -4,6 +4,8 @@ import { Profissional } from "./profissional";
 export class AlunoProfissional {
     aluno: Aluno;
     profissional: Profissional;
+    status: string;
+    tipoAtendimento: string;
 
     constructor() {
         this.clean();
@@ -12,5 +14,7 @@ export class AlunoProfissional {
     clean(): void {
         this.aluno = new Aluno();
         this.profissional = new Profissional();
+        status = "";
+        this.tipoAtendimento = "";
     }
 }
