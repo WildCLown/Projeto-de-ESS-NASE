@@ -8,49 +8,26 @@
 <table>
 <tr>
     <td><label>Aluno </label></td>
-    <td>
-        <select name="cursos">
-            <option value="padrao">Selecione o aluno</option>
-        </select>
-
-    </td>
+    <td><input [(ngModel)]="consulta.aluno.nome"></td>
  </tr>
 <tr>
     <td><label>Profissional </label></td>
-    <select name=profissionais>
-        <option value="padrao">
-            Selecione o profissional
-        </option>
-    </select>
+    <td><input [(ngModel)]="consulta.profissional.nome"></td>
 </tr>
 <tr>
     <td><label>Data </label></td>
-    <select name=profissionais>
-        <option value="padrao">
-            mês
-        </option>
-    </select>
-    <select name=profissionais>
-        <option value="padrao">
-            dia
-        </option>
-    </select>
+    <td><input [(ngModel)]="consulta.dia"></td>
+    <td><label>/</label></td>
+    <td><input [(ngModel)]="consulta.mes"></td>
 </tr>
 <tr>
     <td><label>Horário </label></td>
-    <select name=profissionais>
-        <option value="padrao">
-            hora
-        </option>
-    </select>
-    <select name=profissionais>
-        <option value="padrao">
-            minuto
-        </option>
-    </select>
+    <td><input [(ngModel)]="consulta.hora"></td>
+    <td><label>:</label></td>
+    <td><input [(ngModel)]="consulta.minuto"></td>
 </tr>
 <tr>
-    <td><button (click)="criarAluno(aluno)">Marcar</button></td>
+    <td><button (click)="criarConsulta(consulta)">Marcar</button></td>
 </tr>
 </table>
 

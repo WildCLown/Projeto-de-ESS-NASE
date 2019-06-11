@@ -8,23 +8,14 @@
 <table>
 <tr>
     <td><label>Profissional </label></td>
-    <select name=profissionais>
-        <option value="padrao">
-            Selecione o profissional
-        </option>
-    </select>
+    <td><input [(ngModel)]="consulta.profissional.nome"> </td>
 </tr>
 <tr>
     <td><label>Mês </label></td>
-    <select name=profissionais>
-        <option value="padrao">
-            1
-        </option>
-    </select>
+    <td><input [(ngModel)]="consulta.mes"> </td>
 </tr>
 <tr>
-    <td><button (click)="criarAluno(aluno)">Buscar</button></td>
+    <td><button (click)="mostrarConsultas()">Buscar</button></td>
 </tr>
 </table>
-
 </html>

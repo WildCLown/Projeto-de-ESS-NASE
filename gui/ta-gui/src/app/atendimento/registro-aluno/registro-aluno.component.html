@@ -4,23 +4,37 @@
 <h3>
     Aluno:
 </h3>
-<button>
+<button (click)="mostrarLista()">
     Buscar aluno existente
 </button>
 
 <table>
+        <tr *ngIf="mostrarLista">
+           <th>Nome</th>
+           <th>Curso </th>
+           <th>CPF </th>
+           <th>Gênero </th>
+           <th>Telefone </th>
+        </tr>
+        <tr *ngFor="let a of alunos" name="alunolist">
+           <td name="nomelist">{{a.nome}}</td>
+           <td>{{a.curso}}</td>
+           <td name="cpflist">{{a.cpf}}</td>
+           <td>{{a.genero}}</td>
+           <td>{{a.telefone}}</td>
+           <td><button (click)="preencher(a)">Selecionar</button></td>
+        </tr>
+        </table>
+
+<table>
+
 <tr>
    <td><label>Nome </label></td>
    <td><input [(ngModel)]="aluno.nome" name="namebox"></td>
 </tr>
 <tr>
     <td><label>Curso </label></td>
-    <td>
-        <select name="cursos">
-            <option value="padrao">Selecione o curso</option>
-        </select>
-
-    </td>
+    <td><input [(ngModel)]="aluno.curso" name="cursobox"> </td>
  </tr>
 <tr>
    <td><label>CPF </label></td>
@@ -28,51 +42,31 @@
 </tr>
 <tr>
     <td><label>Gênero </label></td>
-    <td><input [(ngModel)]="aluno.genero" ></td>
+    <td><input [(ngModel)]="aluno.genero" name="generobox"></td>
  </tr>
 <tr>
    <td><label>Telefone </label></td>
-   <td><input [(ngModel)]="aluno.telefone" ></td>
+   <td><input [(ngModel)]="aluno.telefone" name="telefonebox"></td>
 </tr>
 <tr>
     <td><label>Profissional </label></td>
-    <select name=profissionais>
-        <option value="padrao">
-            Selecione o profissional
-        </option>
-    </select>
+    <td><input [(ngModel)]="profissional.nome" name="profissionalnamebox"> </td>
 </tr>
 <tr>
     <td><label>Status </label></td>
-    <td><input [(ngModel)]="aluno.status" ></td>
+    <td><input [(ngModel)]="aluno.status" name="statusbox"></td>
  </tr>
  <tr>
     <td><label>Tipo de atendimento </label></td>
-    <td><input [(ngModel)]="aluno.tipoAtendimento" ></td>
+    <td><input [(ngModel)]="aluno.tipoAtendimento" name="tipoDeAtendimento"></td>
  </tr>
 <tr>
    <td><label>Especialidade </label></td>
-   <td><input [(ngModel)]="profissional.especialidade" ></td>
+   <td><input [(ngModel)]="profissional.especialidade" name="especialidadebox"></td>
 </tr>
 <tr>
     <td><button (click)="criarAluno(aluno)">Adicionar</button></td>
 </tr>
 </table>
-
-<!-- <table>
-<tr *ngIf="alunos.length > 0">
-   <th>Nome</th>
-   <th>CPF</th>
-   <th>e-mail</th>
-   <th>GitHub</th>
-</tr>
-<tr *ngFor="let a of alunos" name="alunolist">
-   <td name="nomelist">{{a.nome}}</td>
-   <td name="cpflist">{{a.cpf}}</td>
-   <td>{{a.email}}</td>
-   <td>{{a.git}}</td>
-   <td><button (click)="removerAluno(a)">Remover</button></td>
-</tr>
-</table> -->
 
 </html>
