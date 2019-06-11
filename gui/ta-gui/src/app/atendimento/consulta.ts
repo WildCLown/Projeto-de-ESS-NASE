@@ -1,10 +1,8 @@
-import { Aluno } from './aluno'
-import { Profissional } from './profissional'
+import { AlunoProfissional } from './alunoProfissional';
 
 export class Consulta {
     
-    aluno: Aluno;
-    profissional: Profissional;
+    alunoProfissional: AlunoProfissional;
     mes: number;
     dia: number;
     hora: number;
@@ -15,8 +13,7 @@ export class Consulta {
     }
   
     clean(): void {
-      this.aluno = new Aluno();
-      this.profissional = new Profissional();
+      this.alunoProfissional = new AlunoProfissional();
       this.mes = null;
       this.dia = null;
       this.hora = null;
