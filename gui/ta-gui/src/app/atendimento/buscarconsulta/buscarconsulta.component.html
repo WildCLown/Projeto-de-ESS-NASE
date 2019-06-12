@@ -8,13 +8,13 @@
         <th>Gênero </th>
         <th>Telefone </th>
     </tr>
-    <tr *ngFor="let c of consulta" name="consultalist">
-        <td name="nomelist">{{a.nome}}</td>
-        <td name="cursolist">{{a.curso}}</td>
-        <td name="cpflist">{{a.cpf}}</td>
-        <td name="generolist">{{a.genero}}</td>
-        <td name="telefonelist">{{a.telefone}}</td>
-        <td><button (click)="preencher(a)">Selecionar {{a.nome}}</button></td>
+    <tr *ngFor="let c of consultas" name="consultalist">
+        <td name="nomelist">{{c.alunoProfissional.profissional.nome}}</td>
+        <td name="especialidadelist">{{c.alunoProfissional.profissional.especialidade}}</td>
+        <td name="meslist">{{c.mes}}</td>
+        <td name="dialist">{{c.dia}}</td>
+        <td name="horalist">{{c.hora}}</td>
+        <td name="minutolist">{{c.hora}}</td>
     </tr>
 </table>
 
@@ -45,7 +45,7 @@
         <th>Hora </th>
         <th>Minuto </th>
     </tr>
-    <tr *ngFor="let c of consulta" name="consultalist">
+    <tr *ngFor="let c of consultasQuery" name="consultaquerylist">
         <td name="nomelist">{{c.alunoProfissional.profissional.nome}}</td>
         <td name="especialidadelist">{{c.alunoProfissional.profissional.especialidade}}</td>
         <td name="meslist">{{c.mes}}</td>

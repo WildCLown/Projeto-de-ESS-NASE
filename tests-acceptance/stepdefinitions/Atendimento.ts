@@ -14,6 +14,9 @@ let sameName = ((elem, name) => elem.element(by.name('nomelist')).getText().then
 let sameCourse = ((elem, course) => elem.element(by.name('cursolist')).getText().then(text => text === course));
 let sameGender = ((elem, gender) => elem.element(by.name('generolist')).getText().then(text => text === gender));
 let sameTnumber = ((elem, tnumber) => elem.element(by.name('telefonelist')).getText().then(text => text === tnumber));
+let sameMonth = ((elem, month) => elem.element(by.name('meslist')).getText().then(text => text === month));
+let sameDay = ((elem, day) => elem.element(by.name('dialist')).getText().then(text => text === day));
+let sameHour = ((elem, hour) => elem.element(by.name('horalist')).getText().then(text => text === hour));
 
 // Comparadores para os <input>
 let sameCPF2 = ((elem, cpf) => elem.element(by.name('cpfbox')).getAttribute('value').then(text => text === cpf));
@@ -23,6 +26,8 @@ let sameGender2 = ((elem, gender) => elem.element(by.name('generobox')).getAttri
 let sameTnumber2 = ((elem, tnumber) => elem.element(by.name('telefonebox')).getAttribute('value').then(text => text === tnumber));
 
 let pAND = ((p, q) => p.then(a => q.then(b => a && b)))
+let pAND3 = ((x, y, z) => x.then(a => y.then(b => z.then(c => a && b && c))));
+let pAND4 = ((x, y, z, v) => x.then(a => y.then(b => z.then(c => v.then(d => a && b && c && d)))));
 let pAND5 = ((x, y, z, v, w) => x.then(a => y.then(b => z.then(c => v.then(d => w.then(e => a && b && c && d && e))))));
 
 defineSupportCode(function ({ Given, When, Then }) {
@@ -128,14 +133,14 @@ defineSupportCode(function ({ Given, When, Then }) {
         await $("a[name='buscarConsulta']").click();
     })
 
-    Given(/^the professional "([^\"]*)" have schedule appointments on "([^\"]*)" "(\d*)" at "([^\"]*)" and "([^\"]*)"$/, async (professional, month, day, hour, hour2) => {
-        var allschedules : ElementArrayFinder = element.all(by.name('schedulelist'));
-        allschedules.filter(elem => pAVAILABLE(availableDate(elem,month, day, hour, hour2),sameName(elem,name))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+    Given(/^the professional "([^\"]*)" have schedule appointments on "([^\"]*)" "(\d*)" at "([^\"]*)"$/, async (professional, month, day, hour) => {
+        var allschedules : ElementArrayFinder = element.all(by.name('consultalist'));
+        allschedules.filter(elem => pAND4(sameName(elem, professional), sameMonth(elem, month), sameDay(elem, day), sameHour(elem, hour))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
 
-    Then(/^I can see "([^\"]*)"'s schedule appointments on "([^\"]*)" "(\d*)" at "([^\"]*)" and "([^\"]*)"$/, async (professional, month, day, hour, hour2) => {
-        var allappointment : ElementArrayFinder = element.all(by.name('appointmentlist'));
-        allappointment.filter(elem => pAND(sameMonth(elem,month),sameDay(elem,day),sameTime(elem,time))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+    Then(/^I can see "([^\"]*)"'s schedule appointments on "([^\"]*)" "(\d*)" at "([^\"]*)"$/, async (professional, month, day, hour) => {
+        var allappointment : ElementArrayFinder = element.all(by.name('consultaquerylist'));
+        allappointment.filter(elem => pAND4(sameName(elem, professional), sameMonth(elem, month), sameDay(elem, day), sameHour(elem, hour))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
 
 })
