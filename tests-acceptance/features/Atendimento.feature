@@ -24,12 +24,16 @@ Scenario: Schedule an appointment
 	When I select "Teixeira" as the "student"
 	When I select "Katia" as the "professional" 
 	When I select date "August" "10" on "8"
+	When I select "August" as the "month"
+	When I select "10" as the "day"
+	When I select "8" as the "hour"
+	When I select "0" as the "minute"
 	When I ask the system to schedule
 	Then I can see the scheduled appointment on "August" "10" at "8"
 
 Scenario: Search for an appointment
 	Given  I am at the appointments page
-	Given the professional "Estyvison" have scheduled appointments on "July" "3" at "2pm" and "4pm"
+	Given the professional "Estyvison" have scheduled appointments on "July" "3" at "2" and "4"
 	When I select "Estyvison" as the "professional"
 	When I select "July" as the "month"
-	Then I can see "Estyvison"’s scheduled appointments on "July" "3" at "2pm" and "4pm" 
+	Then I can see "Estyvison"’s scheduled appointments on "July" "3" at "2" and "4" 

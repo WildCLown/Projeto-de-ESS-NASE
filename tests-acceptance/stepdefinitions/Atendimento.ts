@@ -103,12 +103,9 @@ defineSupportCode(function ({ Given, When, Then }) {
         allprofessionals.filter(elem => pAVAILABLE(availableDate(elem,month, day, hour),sameName(elem,name))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
 
-    When(/^I select "([^\"]*)" as the "([^\"]*)"$/, async (name, listname) => {
-        
-    });
-
-    When(/^I select date "([^\"]*)" "(\d*)" on "([^\"]*)"$/, async (month, day, time) => {
-        
+    When(/^I select "([^\"]*)" as the "([^\"]*)"$/, async (option, optionlist) => {
+        var box = "input[name='" + <string>optionlist + "box']";
+        await $(box).sendKeys(<string>option);
     });
 
     When(/^I ask the system to schedule$/, async () => {
@@ -131,16 +128,12 @@ defineSupportCode(function ({ Given, When, Then }) {
         await $("a[name='buscarConsulta']").click();
     })
 
-    Given(/^the professional "([^\"]*)" have schedule appointments on "([^\"]*)" "(\d*)" at "([^\"]*)" and "([^\"]*)"$/, async (professional, month, day, time, time2) => {
+    Given(/^the professional "([^\"]*)" have schedule appointments on "([^\"]*)" "(\d*)" at "([^\"]*)" and "([^\"]*)"$/, async (professional, month, day, hour, hour2) => {
         var allschedules : ElementArrayFinder = element.all(by.name('schedulelist'));
-        allschedules.filter(elem => pAVAILABLE(availableDate(elem,month, day, time, time2),sameName(elem,name))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+        allschedules.filter(elem => pAVAILABLE(availableDate(elem,month, day, hour, hour2),sameName(elem,name))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
 
-    When(/^I select "([^\"]*)" as the month$/, async (month) => {
-        
-    });
-
-    Then(/^I can see "([^\"]*)"'s schedule appointments on "([^\"]*)" "(\d*)" at "([^\"]*)" and "([^\"]*)"$/, async (professional,month,day,time, time2) => {
+    Then(/^I can see "([^\"]*)"'s schedule appointments on "([^\"]*)" "(\d*)" at "([^\"]*)" and "([^\"]*)"$/, async (professional, month, day, hour, hour2) => {
         var allappointment : ElementArrayFinder = element.all(by.name('appointmentlist'));
         allappointment.filter(elem => pAND(sameMonth(elem,month),sameDay(elem,day),sameTime(elem,time))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });

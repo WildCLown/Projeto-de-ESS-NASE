@@ -8,23 +8,23 @@
 <table>
 <tr>
     <td><label>Aluno </label></td>
-    <td><input [(ngModel)]="consulta.aluno.nome"></td>
+    <td><input [(ngModel)]="consulta.aluno.nome" name="studentbox"></td>
  </tr>
 <tr>
     <td><label>Profissional </label></td>
-    <td><input [(ngModel)]="consulta.profissional.nome"></td>
+    <td><input [(ngModel)]="consulta.profissional.nome" name="professionalbox"></td>
 </tr>
 <tr>
     <td><label>Data </label></td>
-    <td><input [(ngModel)]="consulta.dia"></td>
+    <td><input [(ngModel)]="consulta.dia" name="daybox"></td>
     <td><label>/</label></td>
-    <td><input [(ngModel)]="consulta.mes"></td>
+    <td><input [(ngModel)]="consulta.mes" name="monthbox"></td>
 </tr>
 <tr>
     <td><label>Horário </label></td>
-    <td><input [(ngModel)]="consulta.hora"></td>
+    <td><input [(ngModel)]="consulta.hora" name="hourbox"></td>
     <td><label>:</label></td>
-    <td><input [(ngModel)]="consulta.minuto"></td>
+    <td><input [(ngModel)]="consulta.minuto" name="minutebox"></td>
 </tr>
 <tr>
     <td><button (click)="criarConsulta(consulta)">Marcar</button></td>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Consulta } from "../consulta"
 
 @Component({
   selector: 'app-buscarconsulta',
@@ -6,11 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./buscarconsulta.component.css']
 })
 export class BuscarconsultaComponent implements OnInit {
+  
+  consulta: Consulta = new Consulta;
+  consultas: Consulta[];
+  consultasQuery: Consulta[];
 
-    constructor() { }
-    
-    ngOnInit() {
-    
-    }
+  mostraLista: boolean = false;
+  mostraConsultas: boolean = false;
+  
+  constructor() { }
+  
+  ngOnInit() {
+  
+  }
 
 }
