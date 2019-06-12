@@ -105,7 +105,7 @@ defineSupportCode(function ({ Given, When, Then }) {
 
     Given(/^the professional "([^\"]*)" is available on "([^\"]*)" "(\d*)" at "([^\"]*)"$/, async (professional, month, day, hour) => {
         var allprofessionals : ElementArrayFinder = element.all(by.name('professionallist'));
-        allprofessionals.filter(elem => pAVAILABLE(availableDate(elem,month, day, hour),sameName(elem,name))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+        allprofessionals.filter(elem => pAND4(sameName(elem, professional), sameMonth(elem, month), sameDay(elem, day), sameHour(elem, hour))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(0));
     });
 
     When(/^I select "([^\"]*)" as the "([^\"]*)"$/, async (option, optionlist) => {
