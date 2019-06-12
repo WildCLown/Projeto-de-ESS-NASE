@@ -9,8 +9,7 @@ Scenario: Auto filling student’s data with database consultation
 	Given "Joãozinho"’s CPF is "190823432-00"
 	Given "Joãozinho"’s gender is "Male"
 	Given "Joãozinho"’s telephone number is "99090-9876"
-	When I select the "search existing student" option
-	When I select "Joãozinho" at the students database page
+	When I select the "Selecionar Joãozinho" option
 	Then I can see the name "Joãozinho", course "political science", CPF "190823432-00", gender "Male" and telephone number "99090-9876" at the register student page
 
 Scenario: Unsuccessfully student registration

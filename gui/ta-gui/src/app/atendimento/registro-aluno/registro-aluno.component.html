@@ -18,15 +18,15 @@
         </tr>
         <tr *ngFor="let a of alunos" name="alunolist">
            <td name="nomelist">{{a.nome}}</td>
-           <td>{{a.curso}}</td>
+           <td name="cursolist">{{a.curso}}</td>
            <td name="cpflist">{{a.cpf}}</td>
-           <td>{{a.genero}}</td>
-           <td>{{a.telefone}}</td>
-           <td><button (click)="preencher(a)">Selecionar</button></td>
+           <td name="generolist">{{a.genero}}</td>
+           <td name="telefonelist">{{a.telefone}}</td>
+           <td><button (click)="preencher(a)">Selecionar {{a.nome}}</button></td>
         </tr>
-        </table>
+</table>
 
-<table>
+<table id="boxes">
 
 <tr>
    <td><label>Nome </label></td>

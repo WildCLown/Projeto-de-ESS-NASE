@@ -5,9 +5,21 @@ let expect = chai.expect;
 
 let sleep = (ms => new Promise(resolve => setTimeout(resolve, ms)));
 
-let sameName = ((elem, name) => elem.element(by.name('atividadelist')).getText().then(text => text === name));
+let sameCPF = ((elem, cpf) => elem.element(by.name('cpflist')).getText().then(text => text === cpf));
+let sameName = ((elem, name) => elem.element(by.name('nomelist')).getText().then(text => text === name));
+let sameCourse = ((elem, course) => elem.element(by.name('cursolist')).getText().then(text => text === course));
+let sameGender = ((elem, gender) => elem.element(by.name('generolist')).getText().then(text => text === gender));
+let sameTnumber = ((elem, tnumber) => elem.element(by.name('telefonelist')).getText().then(text => text === tnumber));
 
-let pAND = (p => p.then(a => a && p))
+// Comparadores para os <input>
+let sameCPF2 = ((elem, cpf) => elem.element(by.name('cpfbox')).getAttribute('value').then(text => text === cpf));
+let sameName2 = ((elem, name) => elem.element(by.name('nomebox')).getAttribute('value').then(text => text === name));
+let sameCourse2 = ((elem, course) => elem.element(by.name('cursobox')).getAttribute('value').then(text => text === course));
+let sameGender2 = ((elem, gender) => elem.element(by.name('generobox')).getAttribute('value').then(text => text === gender));
+let sameTnumber2 = ((elem, tnumber) => elem.element(by.name('telefonebox')).getAttribute('value').then(text => text === tnumber));
+
+let pAND = ((p, q) => p.then(a => q.then(b => a && b)))
+let pAND5 = ((x, y, z, v, w) => x.then(a => y.then(b => z.then(c => v.then(d => w.then(e => a && b && c && d && e))))));
 
 defineSupportCode(function ({ Given, When, Then }) {
     Given(/^I am at the register student page$/, async () => {
@@ -16,9 +28,9 @@ defineSupportCode(function ({ Given, When, Then }) {
         await $("a[name='Atendimento']").click();
         await $("a[name='registro']").click();
     })
-
     
     Given(/^"([^\"]*)" already had an appointment before$/, async (name) => {
+        await element(by.buttonText('Buscar aluno existente')).click();
         var allalunos : ElementArrayFinder = element.all(by.name('alunolist'));
         allalunos.filter(elem => sameName(elem,name)).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
@@ -47,13 +59,9 @@ defineSupportCode(function ({ Given, When, Then }) {
         await element(by.buttonText(<string> buttonName)).click();
     });
 
-    When(/^I select "([^\"]*)" at the students database page$/, async (studentName) => {
-        await element(by.buttonText(<string> studentName)).click();
-    });
-
     Then(/^I can see the name "([^\"]*)", course "([^\"]*)", CPF "([^\"]*)", gender "([^\"]*)" and telephone number "([^\"]*)" at the register student page$/, async (name, course, cpf, gender, tnumber) => {
-        var allalunos : ElementArrayFinder = element.all(by.name('appointmentlist'));
-        allalunos.filter(elem => pAND(sameCPF(elem,cpf),sameName(elem,name),sameTnumber(elem,tnumber),sameGender(elem,gender),sameCourse(elem,course))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+        var entradas : ElementArrayFinder = element.all(by.name('boxes'));
+        entradas.filter(elem => pAND5(sameCPF2(elem,cpf),sameName2(elem,name),sameTnumber2(elem,tnumber),sameGender2(elem,gender),sameCourse2(elem,course))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
 
     Given(/^No professional has been chosen$/, async () => {
@@ -71,6 +79,7 @@ defineSupportCode(function ({ Given, When, Then }) {
         var errorMessage : ElementArrayFinder = element.all(by.name('errorMessage'));
         errorMessage.filter(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
+
 
     Given(/^I am at the register students page$/, async () => {
         await browser.get("http://localhost:4200/");
