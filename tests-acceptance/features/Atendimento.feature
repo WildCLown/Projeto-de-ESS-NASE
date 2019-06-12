@@ -20,12 +20,12 @@ Scenario: Unsuccessfully student registration
 
 Scenario: Schedule an appointment
 	Given I am at the Scheduling page
-	Given the professional "Kátia" is available on "August" "10" at "8am"
+	Given the professional "Kátia" is available on "August" "10" at "8"
 	When I select "Teixeira" as the "student"
 	When I select "Katia" as the "professional" 
-	When I select date "August" "10" on "8am"
+	When I select date "August" "10" on "8"
 	When I ask the system to schedule
-	Then I can see the scheduled appointment on "August" "10" at "8am"
+	Then I can see the scheduled appointment on "August" "10" at "8"
 
 Scenario: Search for an appointment
 	Given  I am at the appointments page
