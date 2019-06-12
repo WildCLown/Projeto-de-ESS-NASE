@@ -2,9 +2,8 @@ export class Aluno {
     nome: string;
     curso: string;
     cpf: string;
-    genero: boolean;
+    genero: string;
     telefone: string;
-    tipoAtendimento: string;
  
     constructor() {
       this.clean();
@@ -15,8 +14,7 @@ export class Aluno {
       this.cpf = "";
       this.curso = "";
       this.telefone= "";
-      this.genero = null;
-      this.tipoAtendimento = "";
+      this.genero = "";
     }
   
     clone(): Aluno {
@@ -31,7 +29,6 @@ export class Aluno {
       this.curso = from.curso;
       this.telefone = from.telefone;
       this.genero = from.genero;
-      this.tipoAtendimento = from.tipoAtendimento;
     }
   }
   

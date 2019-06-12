@@ -10,6 +10,11 @@ export class Profissional {
       this.nome = "";
       this.especialidade = "";
     }
+
+    copyFrom(from: Profissional): void {
+      this.nome = from.nome;
+      this.especialidade = from.especialidade;
+    }
   
   }
   

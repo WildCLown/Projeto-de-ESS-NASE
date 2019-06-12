@@ -17,4 +17,11 @@ export class AlunoProfissional {
         this.status = "";
         this.tipoAtendimento = "";
     }
+
+    copyFrom(from: AlunoProfissional): void {
+        this.aluno.copyFrom(from.aluno);
+        this.profissional.copyFrom(from.profissional);
+        this.status = from.status;
+        this.tipoAtendimento = from.tipoAtendimento;
+    }
 }
