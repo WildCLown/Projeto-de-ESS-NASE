@@ -1,4 +1,4 @@
-import { AtividadeEmCampo } from '../../gui/ta-gui/src/app/atividadeEmCampo';
+import { AtividadeEmCampo } from '../../gui/ta-gui/src/app/atividadeEmCampo/atividadeEmCampo';
 
 export class CadastroDeAtividades {
   atividades: AtividadeEmCampo[] = [];
