@@ -1,6 +1,7 @@
 import { Aluno } from "./aluno";
 import { Profissional } from "./profissional";
 
+
 export class AlunoProfissional {
     aluno: Aluno;
     profissional: Profissional;

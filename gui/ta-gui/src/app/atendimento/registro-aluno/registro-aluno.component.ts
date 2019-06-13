@@ -18,6 +18,7 @@ export class RegistroAlunoComponent implements OnInit {
     criarAlunoProfissional(ap: AlunoProfissional): void {
         this.aps.criar(ap).then( aptemp => {
             this.alunosProfissionais.push(aptemp);
+
         })
         .catch(erro => alert(erro))
     }
@@ -28,7 +29,10 @@ export class RegistroAlunoComponent implements OnInit {
 
     preencher() {}
     
-    ngOnInit() {
+    ngOnInit(): void  {
+        this.aps.getAlunosProfissionais()
+        .then(aps1 => this.alunosProfissionais = aps1).
+        catch(erro => alert(erro))
     }
 
 }

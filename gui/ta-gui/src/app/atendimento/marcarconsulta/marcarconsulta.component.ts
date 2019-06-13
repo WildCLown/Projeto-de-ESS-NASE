@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AlunoProfissionalService } from '../alunoProfissional.service'
+import { AlunoProfissional } from '../alunoProfissional';
+import { Consulta } from '../consulta';
+import { ConsultaService } from '../consulta.service';
 
 @Component({
   selector: 'app-marcarconsulta',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarcarconsultaComponent implements OnInit {
 
-  constructor() { }
+  alunosProfissionais: AlunoProfissional[];
+  consulta: Consulta = new Consulta;
 
-  ngOnInit() {
+  constructor(private aps: AlunoProfissionalService, private cs: ConsultaService) { }
+
+  ngOnInit(): void {
+    this.aps.getAlunosProfissionais()
+      .then(aps1 => this.alunosProfissionais = aps1).
+      catch(erro => alert(erro))
   }
 
 }

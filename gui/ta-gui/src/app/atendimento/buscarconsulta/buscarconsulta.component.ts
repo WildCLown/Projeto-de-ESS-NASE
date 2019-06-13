@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Consulta } from "../consulta"
+import { ConsultaService } from '../consulta.service';
 
 @Component({
   selector: 'app-buscarconsulta',
@@ -15,10 +16,13 @@ export class BuscarconsultaComponent implements OnInit {
   mostraLista: boolean = false;
   mostraConsultas: boolean = false;
   
-  constructor() { }
+  constructor(private cs: ConsultaService) { }
   
-  ngOnInit() {
-  
+  ngOnInit(): void {
+    this.cs.getConsultas()
+      .then(aps1 => this.consultas = aps1).
+      catch(erro => alert(erro))
   }
+
 
 }
