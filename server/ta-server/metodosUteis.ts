@@ -45,7 +45,7 @@ export class MetodosUteis {
     }
 
     consultaEmBranco(consulta: Consulta):boolean {
-        if (this.apEmBranco(consulta.alunoProfissional) || this.numeroNulo(consulta.mes) || this.numeroNulo(consulta.dia) || this.numeroNulo(consulta.hora) || this.numeroNulo(consulta.minuto)) {
+        if (!this.apEmBranco(consulta.alunoProfissional) || this.numeroNulo(consulta.mes) || this.numeroNulo(consulta.dia) || this.numeroNulo(consulta.hora) || this.numeroNulo(consulta.minuto)) {
             return false;
         } else {
             return true;
