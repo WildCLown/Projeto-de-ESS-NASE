@@ -5,10 +5,14 @@ import { AtividadeEmCampo } from '../../gui/ta-gui/src/app/atividadeEmCampo/ativ
 import { CadastroDeAtividades } from './cadastrodeatividades';
 import { CadastroConsulta } from './cadastroconsultas';
 import { CadastroAlunoProfissional } from './cadastroAlunoProfissional'
+import { AlunoProfissional } from '../../gui/ta-gui/src/app/atendimento/alunoProfissional';
+import { Consulta } from '../../gui/ta-gui/src/app/atendimento/consulta';
 
 var app = express();
 
 var cadastroAtividades: CadastroDeAtividades = new CadastroDeAtividades();
+var cadastroAlunoProfissional: CadastroAlunoProfissional = new CadastroAlunoProfissional();
+var cadastroConsulta: CadastroConsulta = new CadastroConsulta();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -65,7 +69,33 @@ app.delete('/atividade',function(req: express.Request, res: express.Response){
   }
 });
 
+app.get('/registros', function (req, res) {
+  res.send(JSON.stringify(cadastroAlunoProfissional.getAlunosProfissionais()));
+})
 
+app.post('/registro', function (req: express.Request, res: express.Response) {
+  var ap: AlunoProfissional = <AlunoProfissional>req.body;
+  ap = cadastroAlunoProfissional.criar(ap);
+  if (ap) {
+    res.send({ "success": "O registro foi cadastrado com sucesso" });
+  } else {
+    res.send({ "failure": "O registro não pode ser cadastrado" });
+  }
+})
+
+app.get('/consultas', function (req, res) {
+  res.send(JSON.stringify(cadastroConsulta.getConsultas()));
+})
+
+app.post('/consulta', function (req: express.Request, res: express.Response) {
+  var consulta: Consulta = <Consulta>req.body;
+  consulta = cadastroConsulta.criar(consulta);
+  if (consulta) {
+    res.send({ "success": "A cunsulta foi cadastrada com sucesso" });
+  } else {
+    res.send({ "failure": "A consulta não pode ser cadastrada" });
+  }
+})
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
