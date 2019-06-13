@@ -25,6 +25,7 @@ app.use(allowCrossDomain);
 app.use(bodyParser.json());
 
 app.get('/atividades', function (req, res) {
+    console.log('GET /alunos: ' + req)
   res.send(JSON.stringify(cadastroAtividades.getAtividades()));
 })
 
@@ -70,6 +71,7 @@ app.delete('/atividade',function(req: express.Request, res: express.Response){
 });
 
 app.get('/registros', function (req, res) {
+    console.log('GET /registros: ' + req)
   res.send(JSON.stringify(cadastroAlunoProfissional.getAlunosProfissionais()));
 })
 
@@ -84,6 +86,7 @@ app.post('/registro', function (req: express.Request, res: express.Response) {
 })
 
 app.get('/consultas', function (req, res) {
+    console.log('GET /consultas: ' + req)
   res.send(JSON.stringify(cadastroConsulta.getConsultas()));
 })
 
@@ -91,7 +94,7 @@ app.post('/consulta', function (req: express.Request, res: express.Response) {
   var consulta: Consulta = <Consulta>req.body;
   consulta = cadastroConsulta.criar(consulta);
   if (consulta) {
-    res.send({ "success": "A cunsulta foi cadastrada com sucesso" });
+    res.send({ "success": "A consulta foi cadastrada com sucesso" });
   } else {
     res.send({ "failure": "A consulta não pode ser cadastrada" });
   }

@@ -2,8 +2,10 @@ import { Consulta } from '../../gui/ta-gui/src/app/atendimento/consulta';
 import { MetodosUteis } from './metodosUteis';
 
 export class CadastroConsulta {
-    consultas: Consulta[];
-    mu: MetodosUteis;
+
+    consultas: Consulta[] = [];
+    mu: MetodosUteis = new MetodosUteis();
+
     criar(consulta: Consulta): Consulta {
         var result = null;
         if (this.mu.consultaEmBranco(consulta)) {

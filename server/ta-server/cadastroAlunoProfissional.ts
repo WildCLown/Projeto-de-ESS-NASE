@@ -5,8 +5,8 @@ import { MetodosUteis } from './metodosUteis'
 
 export class CadastroAlunoProfissional {
 
-    alunosProfissionais: AlunoProfissional[];
-    mu: MetodosUteis;
+    alunosProfissionais: AlunoProfissional[] = [];
+    mu: MetodosUteis = new MetodosUteis();
 
     criar(alunoProfissional: AlunoProfissional): AlunoProfissional {
         var result = null;
