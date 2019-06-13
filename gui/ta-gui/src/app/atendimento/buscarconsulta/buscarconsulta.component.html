@@ -1,7 +1,7 @@
 <html (mousemove)="onMove()">
 
-<table>
-    <tr *ngIf="mostraLista">
+<table *ngIf="mostraLista">
+    <tr>
         <th>Nome</th>
         <th>Curso </th>
         <th>CPF </th>
@@ -25,11 +25,11 @@
 <table>
 <tr>
     <td><label>Profissional </label></td>
-    <td><input [(ngModel)]="consulta.alunoProfissional.profissional.nome" name="professionalbox"> </td>
+    <td><input [(ngModel)]="nomePro" name="professionalbox"> </td>
 </tr>
 <tr>
     <td><label>Mês </label></td>
-    <td><input [(ngModel)]="consulta.mes" name="monthbox"> </td>
+    <td><input [(ngModel)]="mes" name="monthbox"> </td>
 </tr>
 <tr>
     <td><button (click)="mostrarConsultas()">Buscar</button></td>
@@ -37,8 +37,8 @@
 </tr>
 </table>
 
-<table>
-    <tr *ngIf="mostraConsultas">
+<table *ngIf="mostraConsultas">
+    <tr>
         <th>Nome</th>
         <th>Especialidade </th>
         <th>Mes </th>
