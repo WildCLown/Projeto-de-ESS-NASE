@@ -19,6 +19,14 @@ export class Consulta {
       this.hora = null;
       this.minuto = null;
     }
+
+    copyFrom(from: Consulta): void {
+      this.alunoProfissional.copyFrom(from.alunoProfissional);
+      this.mes = from.mes;
+      this.dia = from.dia;
+      this.hora = from.hora;
+      this.minuto = from.minuto;
+    }
   
   }
   
