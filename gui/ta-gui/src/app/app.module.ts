@@ -12,7 +12,8 @@ import { AtendimentoModule } from './atendimento/atendimento.module';
 import { RegistroAlunoComponent } from './atendimento/registro-aluno/registro-aluno.component';
 import { BuscarconsultaComponent } from './atendimento/buscarconsulta/buscarconsulta.component';
 import { MarcarconsultaComponent } from './atendimento/marcarconsulta/marcarconsulta.component';
-import { AtendimentoRoutingModule } from './atendimento-routing.module'
+import { AlunoProfissionalService } from './atendimento/alunoProfissional.service'
+import { ConsultaService } from './atendimento/consulta.service'
 
 const appRoutes: Routes = [
     { path: 'atividadeEmCampo', component: AtividadeEmCampoComponent },
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
     AtendimentoModule, 
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AtividadeEmCampoService],
+  providers: [AtividadeEmCampoService, AlunoProfissionalService, ConsultaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
