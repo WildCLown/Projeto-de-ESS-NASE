@@ -84,7 +84,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     });
 
     When(/^I ask the system to register$/, async () => {
-        await request.post(base_url + "agendamento").then(body =>
+        await request.post(base_url + "registro").then(body =>
         expect(body).to.include('failure')).catch(e =>
         expect(e).equal(null));
     });
@@ -114,14 +114,14 @@ defineSupportCode(function ({ Given, When, Then }) {
     });
 
     When(/^I ask the system to schedule$/, async () => {
-        await request.post(base_url + "agendamento").then(body =>
+        await request.post(base_url + "consulta").then(body =>
         expect(body).to.include('success')).catch(e =>
         expect(e).equal(null));
     });
 
     Then(/^I can see the schedule appointment on "([^\"]*)" "(\d*)" at "([^\"]*)"$/, async (month, day, hour) => {
-        var allappointment : ElementArrayFinder = element.all(by.name('calendar'));
-        allappointment.filter(elem => pAND(sameMonth(elem,month),sameDay(elem,day),sameHour(elem,hour))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+        var allappointment : ElementArrayFinder = element.all(by.name('consultalist'));
+        allappointment.filter(elem => pAND3(sameMonth(elem,month),sameDay(elem,day),sameHour(elem,hour))).then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
 
     // Cenario 4
