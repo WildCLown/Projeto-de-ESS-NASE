@@ -1,6 +1,4 @@
 <html (mousemove)="onMove()">
-
-
 <h3>
     Aluno:
 </h3>
@@ -8,21 +6,21 @@
     Buscar aluno existente
 </button>
 
-<table>
-        <tr *ngIf="mostraLista">
+<table *ngIf="mostraLista">
+        <tr>
            <th>Nome</th>
            <th>Curso </th>
            <th>CPF </th>
            <th>Gênero </th>
            <th>Telefone </th>
         </tr>
-        <tr *ngFor="let a of alunos" name="alunolist">
-           <td name="nomelist">{{a.nome}}</td>
-           <td name="cursolist">{{a.curso}}</td>
-           <td name="cpflist">{{a.cpf}}</td>
-           <td name="generolist">{{a.genero}}</td>
-           <td name="telefonelist">{{a.telefone}}</td>
-           <td><button (click)="preencher(a)">Selecionar {{a.nome}}</button></td>
+        <tr *ngFor="let a of alunosProfissionais" name="alunolist">
+           <td name="nomelist">{{a.aluno.nome}}</td>
+           <td name="cursolist">{{a.aluno.curso}}</td>
+           <td name="cpflist">{{a.aluno.cpf}}</td>
+           <td name="generolist">{{a.aluno.genero}}</td>
+           <td name="telefonelist">{{a.aluno.telefone}}</td>
+           <td><button (click)="preencher(a)">Selecionar {{a.aluno.nome}}</button></td>
         </tr>
 </table>
 
@@ -54,7 +52,7 @@
 </tr>
 <tr>
     <td><label>Status </label></td>
-    <td><input [(ngModel)]="aluno.status" name="statusbox"></td>
+    <td><input [(ngModel)]="alunoProfissional.status" name="statusbox"></td>
  </tr>
  <tr>
     <td><label>Tipo de atendimento </label></td>
@@ -65,7 +63,11 @@
    <td><input [(ngModel)]="alunoProfissional.profissional.especialidade" name="especialidadebox"></td>
 </tr>
 <tr>
-    <td><button (click)="criarAluno(aluno)">Adicionar</button></td>
+    <td><button (click)="criarAlunoProfissional(alunoProfissional)">Adicionar</button></td>
+    <td *ngIf="mensagemErro">Preencha todos os campos</td>
+</tr>
+<tr>
+    <td *ngIf="mensagemOk">Registro realizado</td>
 </tr>
 </table>
 

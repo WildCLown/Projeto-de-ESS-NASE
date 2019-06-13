@@ -8,11 +8,11 @@
 <table>
 <tr>
     <td><label>Aluno </label></td>
-    <td><input [(ngModel)]="consulta.aluno.nome" name="studentbox"></td>
+    <td><input [(ngModel)]="consulta.alunoProfissional.aluno.nome" name="studentbox"></td>
  </tr>
 <tr>
     <td><label>Profissional </label></td>
-    <td><input [(ngModel)]="consulta.profissional.nome" name="professionalbox"></td>
+    <td><input [(ngModel)]="consulta.alunoProfissional.profissional.nome" name="professionalbox"></td>
 </tr>
 <tr>
     <td><label>Data </label></td>
@@ -28,6 +28,7 @@
 </tr>
 <tr>
     <td><button (click)="criarConsulta(consulta)">Marcar</button></td>
+    <td *ngIf="mensagemErro">Preencha todos os campos</td>
 </tr>
 </table>
 

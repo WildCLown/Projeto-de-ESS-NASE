@@ -13,11 +13,19 @@ export class BuscarconsultaComponent implements OnInit {
   consultas: Consulta[];
   consultasQuery: Consulta[];
 
+
   mostraLista: boolean = false;
   mostraConsultas: boolean = false;
-  
+  mensagemErro: boolean = false;
+
   constructor(private cs: ConsultaService) { }
   
+  mostrarConsultas() {
+
+  }
+  onMove(): void {
+    this.mensagemErro = false;
+  }
   ngOnInit(): void {
     this.cs.getConsultas()
       .then(aps1 => this.consultas = aps1).

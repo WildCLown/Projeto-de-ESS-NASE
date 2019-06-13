@@ -12,10 +12,18 @@ import { ConsultaService } from '../consulta.service';
 export class MarcarconsultaComponent implements OnInit {
 
   alunosProfissionais: AlunoProfissional[];
-  consulta: Consulta = new Consulta;
+  consulta: Consulta = new Consulta();
+  mensagemErro = false;
 
   constructor(private aps: AlunoProfissionalService, private cs: ConsultaService) { }
 
+  onMove(): void {
+      this.mensagemErro = false;
+  }
+  
+  criarConsulta() {
+      
+  }
   ngOnInit(): void {
     this.aps.getAlunosProfissionais()
       .then(aps1 => this.alunosProfissionais = aps1).
