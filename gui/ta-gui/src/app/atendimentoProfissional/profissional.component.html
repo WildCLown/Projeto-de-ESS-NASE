@@ -20,43 +20,23 @@
                </td>
             </tr>
 </table>
-<table *ngIf=buscaProfissional>
-      <td><h1><label>Resultado de busca:</label></h1></td><br>
+<table>
+   <tr *ngIf = buscaProfissional>
+      <td><h1>Resultado de Busca</h1></td>
       <table>
-         <th>Nome Profissional.</th><br>
-         <th>CPF</th><br>
-         <th>E-mail para contato.</th><br>
-         <table *ngIf=ProfissionalExiste>
-                  <td>{{resultBusca.nome}}</td><br>
-                  <td>{{resultBusca.cpf}}</td><br>
-                  <td>{{resultBusca.email}}</td><br>
-                  <td><button (click)="removerAluno(a)">Demitir</button></td>
-                  <td><button (click)="a.detalhes = !a.detalhes">Detalhes</button></td>
-                  <table *ngIf="a.detalhes">
-                        <th>Data Expediente.</th>
-                        <th>Inicio Expediente.</th>
-                        <th>Fim Expediente.</th>
-                        <th>Paciente Marcado.</th>
-                        <td><button (click)="insertExpedienteProfissional(a,profissional.expediente)">Inserir Expediente</button></td><br>
-                        <tr>
-                           <td><input [(ngModel)]="profissional.expediente.data"></td>
-                           <td><input [(ngModel)]="profissional.expediente.inicio"></td>
-                           <td><input [(ngModel)]="profissional.expediente.fim"></td>
-                           <td><input [(ngModel)]="profissional.expediente.paciente"></td>
-                        </tr>
-                        <tr *ngFor="let b of a.expedientes"> 
-                              <td>{{b.data}}</td>
-                              <td>{{b.inicio}}</td>
-                              <td>{{b.fim}}</td>
-                              <td>{{b.paciente}}</td>
-                              <td><button (click)="updatePacienteExpediente(a,b,profissional.expediente.paciente)">Atualizar Paciente</button></td>
-                              <td><button (click)="removerExpedienteProfissional(a,b)">Excluir Expediente</button></td>
-                              
-               
-                        </tr>
-                  </table>
-               </table>
+         <tr *ngIf=ProfissionalExiste>
+               <th>Nome Profissional.</th><br>
+               <th>CPF</th><br>
+               <th>E-mail para contato.</th><br>
+               <td>{{profissionalBusca.nome}}</td><br>
+               <td>{{profissionalBusca.cpf}}</td><br>
+               <td>{{profissionalBusca.email}}</td><br>
+               <td><button (click)="removerAluno(profissionalBusca)">Demitir</button></td>
+               <td><button (click)="profissionalBusca.detalhes = !profissionalBusca.detalhes">Detalhes</button></td>
+         </tr>
       </table>
+   </tr>
+
 </table>
 <table>
 <tr *ngIf="profissionais.length > 0">

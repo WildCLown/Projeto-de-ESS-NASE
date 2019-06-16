@@ -16,29 +16,32 @@ export class ProfissionalComponent implements OnInit {
    profissional: Profissional = new Profissional();
    resultBusca: Profissional = new Profissional();
    profissionais: Profissional[];
-   profissionalBusca: Profissional[];
+   profissionalBusca: Profissional = new Profissional();
    cpfduplicado: boolean = false;
    detalhes: boolean = false;
    buscaProfissional: boolean = false;
    ProfissionalExiste: boolean = false;
+   removidos: string = "";
    showLessBusca():void{
       this.buscaProfissional = false;
    }
    showDetalhes(a: Profissional): void{
       this.detalhes = !this.detalhes;
-      
    }
    searchPro(a:Profissional):void{
       this.buscaProfissional = true;
       this.resultBusca = this.profissional;
       this.ProfissionalExiste = true;
+      
       this.profissionalService.buscar(a)
       .then(ab => {
          if (ab) {
             this.profissionalBusca = ab;
             this.buscaProfissional = true;
+            this.ProfissionalExiste = true;
          } else {
             this.ProfissionalExiste = false;
+            this.buscaProfissional = false;
          }
       })
       .catch(erro => alert(erro));
@@ -48,15 +51,18 @@ export class ProfissionalComponent implements OnInit {
          if(a.expedientes[i]===b){
             a.expedientes[i].paciente = c;
             this.updateProfissional(a);
+            alert("Paciente atualizado com sucesso.");
             break;
          }
       }
    }
    updateProfissional(a: Profissional):void{
+      a.detalhes = false;
       this.profissionalService.atualizar(a)
       .then(ab=>{
          if(ab){
             this.profissional= new Profissional();
+            a.detalhes = true;
          }
       }).catch(erro=> alert(erro));
    }
@@ -65,6 +71,11 @@ export class ProfissionalComponent implements OnInit {
          if(a.expedientes[i]===b){
             a.expedientes.splice(i,1);
             a.cancelamentos++;
+            if(b.paciente == "nome" || b.paciente == ""){
+               alert("Expediente cancelado com sucesso.");
+            }else{
+               alert("O Paciente "+b.paciente+" deve ser remarcado.");
+            }
             this.updateProfissional(a);
             break;
          }
@@ -72,12 +83,14 @@ export class ProfissionalComponent implements OnInit {
    }
    insertExpedienteProfissional(a: Profissional,b: Expediente): void{
       a.expedientes.push(b);
+      a.detalhes = false;
       this.profissionalService.atualizar(a)
       .then(ab=>{
          if(ab){
             this.profissional= new Profissional();
          }
       }).catch(erro=> alert(erro));
+      a.detalhes = true;
    }
    criarAluno(a: Profissional): void {
      this.profissionalService.criar(a)
@@ -97,6 +110,19 @@ export class ProfissionalComponent implements OnInit {
       .then(ab =>{
          if(ab){
             var aux = this.profissionais.findIndex(tr => tr.cpf === ab.cpf);
+            for(var i = 0; i<this.profissionais[aux].expedientes.length;i++){
+               if(i == 0){
+                  this.removidos = this.profissionais[aux].expedientes[i].paciente;
+               }else{
+                  this.removidos = this.removidos+", "+this.profissionais[aux].expedientes[i].paciente;
+               }
+            }
+            if(this.removidos != ""){
+               alert("Os pacientes "+this.removidos+" devem ser remarcados.");
+               this.removidos = "";
+            }else{
+               alert("O profissional "+this.profissionais[aux].nome+" foi demitido com sucesso.");
+            }
             var randm = this.profissionais.splice(aux,1);
          }
       })

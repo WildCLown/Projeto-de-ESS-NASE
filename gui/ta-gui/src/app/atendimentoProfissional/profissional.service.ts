@@ -36,11 +36,11 @@ export class ProfissionalService {
          })
          .catch(this.tratarErro);
   }
-  buscar(profissional: Profissional): Promise<Profissional[]> {
+  buscar(profissional: Profissional): Promise<Profissional> {
     return this.http.post(this.taURL + "/buscaProfissional",JSON.stringify(profissional), {headers: this.headers})
       .toPromise()
       .then(res => {
-        if (res.json().failure) {return null;} else {return res.json() as Profissional[];}
+        if (res.json().failure) {return null;} else {return res.json() as Profissional;}
       })
       .catch(this.tratarErro)
   }
