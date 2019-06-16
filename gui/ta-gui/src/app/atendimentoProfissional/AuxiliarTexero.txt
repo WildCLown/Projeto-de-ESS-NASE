@@ -1,0 +1,29 @@
+Scenário : Cancelar Expediente profissional
+Given : Os alunos “Leão”, “Teixeira” e “Daniel” marcaram atendimento com o profissional “Xuliano” nos horários de 12h, 13h, 14h
+And: “Xuliano” tem de cancelar seu expediente
+And: Nenhum outro profissional possui horário livre
+When : Eu retiro “Xuliano” como profissional disponível
+Then : Sou notificado que devo alertar a “Leão”, “Teixeira” e “Daniel” que seus respectivos horários foram cancelados.
+
+
+Scenário : Cancelar Expediente profissional
+Given : Nenhum aluno marcou atendimento com o profissional “Xuliano”
+And: “Xuliano” tem de cancelar seu expediente
+When : Eu retiro “Xuliano” como profissional disponível
+Then : Sou notificado que “Xuliano” teve seu expediente cancelado com sucesso
+
+Scenário : Gerar relatório
+Given : O profissional “Xuliano” realizou atividades durante o mês
+And : “Xuliano” teve de cancelar 3 vezes seu expediente durante o mês
+When : Eu gero o relatório de atividades de “Xuliano”
+Then : Consigo verificar a identificação de “Xuliano” 
+And: O número de vezes que “Xuliano” Teve de cancelar seu expediente (3)
+And: Número de atendidos em um mês
+And: Suas “informações adicionais”
+
+Scenário : Marcar Expediente profissional
+Given : “Xuliano” havia cancelado seu expediente
+And: “Xuliano” gostaria de marcar seu expediente
+And: Não há estudantes sem profissional para atendê-los
+When : Eu adiciono “Xuliano” como profissional disponível
+Then : Sou notificado que devo “Xuliano” está apto para atender pacientes.

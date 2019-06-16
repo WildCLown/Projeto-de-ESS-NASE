@@ -7,12 +7,16 @@ import { CadastroConsulta } from './cadastroconsultas';
 import { CadastroAlunoProfissional } from './cadastroAlunoProfissional'
 import { AlunoProfissional } from '../../gui/ta-gui/src/app/atendimento/alunoProfissional';
 import { Consulta } from '../../gui/ta-gui/src/app/atendimento/consulta';
+//Texero Stuff
+import {Profissional} from '../../gui/ta-gui/src/app/atendimentoProfissional/profissional';
+import {CadastroDeProfissionais} from './cadastrodeprofissionais';
 
 var app = express();
 
 var cadastroAtividades: CadastroDeAtividades = new CadastroDeAtividades();
 var cadastroAlunoProfissional: CadastroAlunoProfissional = new CadastroAlunoProfissional();
 var cadastroConsulta: CadastroConsulta = new CadastroConsulta();
+var cadastro: CadastroDeProfissionais = new CadastroDeProfissionais();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -58,8 +62,6 @@ app.put('/atividade', function (req: express.Request, res: express.Response) {
     res.send({"failure": "A atividade em campo não pode ser atualizado"});
   }
 })
-
-
 app.delete('/atividade',function(req: express.Request, res: express.Response){
   var atividade = req.body;
   var removido = cadastroAtividades.remover(atividade); //deveria haver um teste de remoção
@@ -102,6 +104,38 @@ app.post('/consulta', function (req: express.Request, res: express.Response) {
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
+})
+//Texero Stuff
+app.get('/profissionais', function (req, res) {
+  res.send(JSON.stringify(cadastro.getAlunos()));
+})
+
+app.post('/profissional', function (req: express.Request, res: express.Response) {
+  var profissional: Profissional = <Profissional> req.body; //verificar se é mesmo Aluno!
+  profissional = cadastro.criar(profissional);
+  if (profissional) {
+    res.send({"success": "O aluno foi cadastrado com sucesso"});
+  } else {
+    res.send({"failure": "O aluno não pode ser cadastrado"});
+  }
+})
+app.delete('/profissional', function (req: express.Request, res: express.Response) {
+  var profissional: Profissional = <Profissional> req.body;
+  profissional = cadastro.remover(profissional);
+  if(profissional){
+    res.send({"success": "O aluno foi eliminado da face da terra"});
+  }else{
+    res.send({"failure":"O aluno não pode ser removido"});
+  }
+})
+app.put('/profissional', function (req: express.Request, res: express.Response) {
+  var profissional: Profissional = <Profissional> req.body;
+  profissional = cadastro.atualizar(profissional);
+  if (profissional) {
+    res.send({"success": "O aluno foi atualizado com sucesso"});
+  } else {
+    res.send({"failure": "O aluno não pode ser atualizado"});
+  }
 })
 
 export { app }

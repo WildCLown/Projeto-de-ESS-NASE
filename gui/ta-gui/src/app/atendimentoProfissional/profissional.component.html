@@ -1,0 +1,57 @@
+<html (mousemove)="onMove()">
+
+<table>
+<tr>
+   <td><label>Nome Profissional</label></td>
+   <td><input [(ngModel)]="profissional.nome" ></td>
+   <td><button (click)="criarAluno(profissional)">Adicionar Profissional</button></td>
+</tr>
+<tr>
+   <td><label>E-mail </label></td>
+   <td><input [(ngModel)]="profissional.email" ></td>
+   <td><button (click)="criarAluno(profissional)">Procurar Profissional.</button></td>
+</tr>
+            <tr>
+               <td><label>CPF </label></td>
+               <td><input [(ngModel)]="profissional.cpf" ></td>
+               <td *ngIf="cpfduplicado">
+                 Já existe um profissional com esse CPF.
+               </td>
+            </tr>
+</table>
+
+<table>
+<tr *ngIf="profissionais.length > 0">
+   <th>Nome Profissional.</th><br>
+   <th>CPF</th><br>
+   <th>E-mail para contato.</th><br>
+</tr>
+<tr *ngFor="let a of profissionais">
+   <td>{{a.nome}}</td><br>
+   <td>{{a.cpf}}</td><br>
+   <td>{{a.email}}</td><br>
+   <td><button (click)="removerAluno(a)">Demitir</button></td>
+   <td><button (click)="a.detalhes = !a.detalhes">Detalhes</button></td>
+   <table *ngIf="a.detalhes">
+         <th>Data Expediente.</th>
+         <th>Inicio Expediente.</th>
+         <th>Fim Expediente.</th>
+         <th>Paciente Marcado.</th><br>
+         <td><button (click)="insertExpedienteProfissional(a,profissional.expediente)">Inserir Expediente</button></td><br>
+         <tr>
+            <td><input [(ngModel)]="profissional.expediente.data"></td>
+            <td><input [(ngModel)]="profissional.expediente.inicio"></td>
+            <td><input [(ngModel)]="profissional.expediente.fim"></td>
+
+         </tr>
+         <tr *ngFor="let b of a.expedientes"> 
+               <td>{{b.data}}</td><br>
+               <td>{{b.inicio}}</td><br>
+               <td>{{b.fim}}</td><br>
+               <td>{{b.paciente}}</td>
+         </tr>
+   </table>
+</tr>
+</table>
+
+</html>

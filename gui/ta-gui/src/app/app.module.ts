@@ -14,6 +14,10 @@ import { BuscarconsultaComponent } from './atendimento/buscarconsulta/buscarcons
 import { MarcarconsultaComponent } from './atendimento/marcarconsulta/marcarconsulta.component';
 import { AlunoProfissionalService } from './atendimento/alunoProfissional.service'
 import { ConsultaService } from './atendimento/consulta.service'
+//Texero Stuff
+//Texero Stuff
+import { ProfissionalComponent } from './atendimentoProfissional/profissional.component';
+import { ProfissionalService } from './atendimentoProfissional/profissional.service';
 
 const appRoutes: Routes = [
     { path: 'atividadeEmCampo', component: AtividadeEmCampoComponent },
@@ -27,16 +31,28 @@ const appRoutes: Routes = [
     AtendimentoComponent,
     RegistroAlunoComponent,
     BuscarconsultaComponent,
-    MarcarconsultaComponent
+    MarcarconsultaComponent,
+    ProfissionalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AtendimentoModule, 
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(/*appRoutes*/
+      [
+        {
+          path: 'atividadeEmCampo',
+          component: AtividadeEmCampoComponent
+        },
+        {
+          path: 'profissional',
+          component: ProfissionalComponent
+        } 
+      ]
+      )
   ],
-  providers: [AtividadeEmCampoService, AlunoProfissionalService, ConsultaService],
+  providers: [AtividadeEmCampoService, AlunoProfissionalService, ConsultaService,ProfissionalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
