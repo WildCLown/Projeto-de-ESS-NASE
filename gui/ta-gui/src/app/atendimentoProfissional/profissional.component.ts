@@ -21,30 +21,44 @@ export class ProfissionalComponent implements OnInit {
    detalhes: boolean = false;
    buscaProfissional: boolean = false;
    ProfissionalExiste: boolean = false;
+   gerarRelatorio: boolean = false;
    removidos: string = "";
    showLessBusca():void{
       this.buscaProfissional = false;
+      this.gerarRelatorio = false;
+   }
+   showRelatorio(a: Profissional):void{
+      this.gerarRelatorio = false;
+      this.resultBusca = this.profissional;
+      this.ProfissionalExiste = false;
+      for(var i = 0; i<this.profissionais.length;i++){
+         if(this.profissionais[i].cpf == a.cpf){
+            this.profissionalBusca = this.profissionais[i];
+            this.gerarRelatorio = true;
+            this.ProfissionalExiste = true;
+            break;
+         }
+      }
    }
    showDetalhes(a: Profissional): void{
       this.detalhes = !this.detalhes;
    }
+   removerAndShowLess(a:Profissional):void{
+      this.removerAluno(a);
+      this.showLessBusca();
+   }
    searchPro(a:Profissional):void{
-      this.buscaProfissional = true;
+      this.buscaProfissional = false;
       this.resultBusca = this.profissional;
-      this.ProfissionalExiste = true;
-      
-      this.profissionalService.buscar(a)
-      .then(ab => {
-         if (ab) {
-            this.profissionalBusca = ab;
+      this.ProfissionalExiste = false;
+      for(var i = 0; i<this.profissionais.length;i++){
+         if(this.profissionais[i].cpf == a.cpf){
+            this.profissionalBusca = this.profissionais[i];
             this.buscaProfissional = true;
             this.ProfissionalExiste = true;
-         } else {
-            this.ProfissionalExiste = false;
-            this.buscaProfissional = false;
+            break;
          }
-      })
-      .catch(erro => alert(erro));
+      }
    }
    updatePacienteExpediente(a:Profissional, b: Expediente,c: string): void{
       for(var i = 0; i<a.expedientes.length;i++){

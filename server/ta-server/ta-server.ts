@@ -139,11 +139,7 @@ app.put('/profissional', function (req: express.Request, res: express.Response) 
 app.post('/buscaProfissional', function (req: express.Request, res: express.Response) {
   var profissional : Profissional = <Profissional> req.body; 
   var profissionaisBuscados = cadastroPro.busca(profissional);
-  if (profissionaisBuscados.length>0) {
     res.send(JSON.stringify(profissionaisBuscados));
-  } else {
-    res.send({"failure": "O profissional não pode ser cadastrado"});
-  }
 })
 
 export { app }

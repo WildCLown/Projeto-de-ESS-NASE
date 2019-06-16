@@ -27,8 +27,8 @@ export class CadastroDeProfissionais {
     if (result) result.copyFrom(profissional);
     return result;
   }
-  busca(atividade: Profissional): Profissional[]{
-    var result: Profissional [] = this.profissionais.filter(c => c.cpf == atividade.cpf);
+  busca(profissional: Profissional): Profissional{
+    var result: Profissional = this.profissionais.find(a => a.cpf == profissional.cpf);
     return result;
   }
   getAlunos(): Profissional[] {

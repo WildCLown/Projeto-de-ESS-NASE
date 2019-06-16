@@ -5,6 +5,7 @@
    <td><label>Nome Profissional</label></td>
    <td><input [(ngModel)]="profissional.nome" ></td>
    <td><button (click)="criarAluno(profissional)">Adicionar Profissional</button></td>
+   <td><button (click)="showRelatorio(profissional)">Gerar Relatorio.</button></td>
 </tr>
 <tr>
    <td><label>E-mail </label></td>
@@ -21,19 +22,52 @@
             </tr>
 </table>
 <table>
+      <tr *ngIf = gerarRelatorio>
+         <table>
+   
+            <td><h1>Relatorio do Profissional</h1></td><br>
+         </table>
+         <table>
+            <tr *ngIf=ProfissionalExiste>
+                  <th>Nome Profissional.</th><br>
+                  <th>CPF</th><br>
+                  <th>E-mail para contato.</th><br>
+                  <th>Expedientes Cancelados.</th>
+               </tr>
+               <tr>
+                  <td>{{profissionalBusca.nome}}</td><br>
+                  <td>{{profissionalBusca.cpf}}</td><br>
+                  <td>{{profissionalBusca.email}}</td><br>
+                  <td>{{profissionalBusca.cancelamentos}}</td><br>
+                  <td><button (click)="removerAndShowLess(profissionalBusca)">Demitir</button></td>
+                  <td><button (click)="profissionalBusca.detalhes = !profissionalBusca.detalhes">Detalhes</button></td>
+                  
+               </tr>
+         </table>
+      </tr>
+   
+   </table>
+
+<table>
    <tr *ngIf = buscaProfissional>
-      <td><h1>Resultado de Busca</h1></td>
+      <table>
+
+         <td><h1>Resultado de Busca</h1></td><br>
+      </table>
       <table>
          <tr *ngIf=ProfissionalExiste>
                <th>Nome Profissional.</th><br>
                <th>CPF</th><br>
                <th>E-mail para contato.</th><br>
+            </tr>
+            <tr>
                <td>{{profissionalBusca.nome}}</td><br>
                <td>{{profissionalBusca.cpf}}</td><br>
                <td>{{profissionalBusca.email}}</td><br>
-               <td><button (click)="removerAluno(profissionalBusca)">Demitir</button></td>
+               <td><button (click)="removerAndShowLess(profissionalBusca)">Demitir</button></td>
                <td><button (click)="profissionalBusca.detalhes = !profissionalBusca.detalhes">Detalhes</button></td>
-         </tr>
+               
+            </tr>
       </table>
    </tr>
 
@@ -50,6 +84,7 @@
    <td>{{a.email}}</td><br>
    <td><button (click)="removerAluno(a)">Demitir</button></td>
    <td><button (click)="a.detalhes = !a.detalhes">Detalhes</button></td>
+
    <table *ngIf="a.detalhes">
          <th>Data Expediente.</th>
          <th>Inicio Expediente.</th>
@@ -69,7 +104,6 @@
                <td>{{b.paciente}}</td>
                <td><button (click)="updatePacienteExpediente(a,b,profissional.expediente.paciente)">Atualizar Paciente</button></td>
                <td><button (click)="removerExpedienteProfissional(a,b)">Excluir Expediente</button></td>
-               
 
          </tr>
    </table>
