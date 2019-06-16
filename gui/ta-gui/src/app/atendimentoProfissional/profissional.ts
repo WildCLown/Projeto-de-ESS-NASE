@@ -7,6 +7,7 @@ export class Profissional {
   expediente: Expediente;
   expedientes: Expediente[];
   cancelamentos: number;
+  informacoes: string;
   constructor() {
     this.clean();
   }
@@ -19,6 +20,7 @@ export class Profissional {
     this.expediente = new Expediente();
     this.expedientes = [];
     this.cancelamentos = 0;
+    this.informacoes = "Favor adicionar informações.";
   }
 
   clone(): Profissional {
@@ -35,5 +37,6 @@ export class Profissional {
     this.expediente = from.expediente;
     this.expedientes = from.expedientes;
     this.cancelamentos = from.cancelamentos;
+    this.informacoes = from.informacoes;
   }
 }

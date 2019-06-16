@@ -31,13 +31,18 @@ export class ProfissionalComponent implements OnInit {
       this.gerarRelatorio = false;
       this.resultBusca = this.profissional;
       this.ProfissionalExiste = false;
+      var found = false;
       for(var i = 0; i<this.profissionais.length;i++){
          if(this.profissionais[i].cpf == a.cpf){
             this.profissionalBusca = this.profissionais[i];
             this.gerarRelatorio = true;
             this.ProfissionalExiste = true;
+            found = true;
             break;
          }
+      }
+      if(!found){
+         alert("Profissional Não existe.")
       }
    }
    showDetalhes(a: Profissional): void{
@@ -51,13 +56,18 @@ export class ProfissionalComponent implements OnInit {
       this.buscaProfissional = false;
       this.resultBusca = this.profissional;
       this.ProfissionalExiste = false;
+      var found = false;
       for(var i = 0; i<this.profissionais.length;i++){
          if(this.profissionais[i].cpf == a.cpf){
             this.profissionalBusca = this.profissionais[i];
             this.buscaProfissional = true;
             this.ProfissionalExiste = true;
+            found = true;
             break;
          }
+      }
+      if(!found){
+         alert("Profissional Não existe.")
       }
    }
    updatePacienteExpediente(a:Profissional, b: Expediente,c: string): void{
