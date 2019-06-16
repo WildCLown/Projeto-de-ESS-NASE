@@ -16,6 +16,7 @@ export class ProfissionalComponent implements OnInit {
    profissional: Profissional = new Profissional();
    resultBusca: Profissional = new Profissional();
    profissionais: Profissional[];
+   profissionalBusca: Profissional[];
    cpfduplicado: boolean = false;
    detalhes: boolean = false;
    buscaProfissional: boolean = false;
@@ -31,14 +32,12 @@ export class ProfissionalComponent implements OnInit {
       this.buscaProfissional = true;
       this.resultBusca = this.profissional;
       this.ProfissionalExiste = true;
-      this.profissionalService.atualizar(a)
-      .then(ba => {
-         if (ba) {
-            this.resultBusca = this.profissionais.find(a => a.cpf == ba.cpf);
-            if (this.resultBusca){
-               this.resultBusca.copyFrom(ba);
-            } 
-         }else{
+      this.profissionalService.buscar(a)
+      .then(ab => {
+         if (ab) {
+            this.profissionalBusca = ab;
+            this.buscaProfissional = true;
+         } else {
             this.ProfissionalExiste = false;
          }
       })

@@ -12,11 +12,10 @@ import {Profissional} from '../../gui/ta-gui/src/app/atendimentoProfissional/pro
 import {CadastroDeProfissionais} from './cadastrodeprofissionais';
 
 var app = express();
-
 var cadastroAtividades: CadastroDeAtividades = new CadastroDeAtividades();
 var cadastroAlunoProfissional: CadastroAlunoProfissional = new CadastroAlunoProfissional();
 var cadastroConsulta: CadastroConsulta = new CadastroConsulta();
-var cadastro: CadastroDeProfissionais = new CadastroDeProfissionais();
+var cadastroPro: CadastroDeProfissionais = new CadastroDeProfissionais();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -107,12 +106,12 @@ app.listen(3000, function () {
 })
 //Texero Stuff
 app.get('/profissionais', function (req, res) {
-  res.send(JSON.stringify(cadastro.getAlunos()));
+  res.send(JSON.stringify(cadastroPro.getAlunos()));
 })
 
 app.post('/profissional', function (req: express.Request, res: express.Response) {
   var profissional: Profissional = <Profissional> req.body; //verificar se é mesmo Aluno!
-  profissional = cadastro.criar(profissional);
+  profissional = cadastroPro.criar(profissional);
   if (profissional) {
     res.send({"success": "O aluno foi cadastrado com sucesso"});
   } else {
@@ -121,7 +120,7 @@ app.post('/profissional', function (req: express.Request, res: express.Response)
 })
 app.delete('/profissional', function (req: express.Request, res: express.Response) {
   var profissional: Profissional = <Profissional> req.body;
-  profissional = cadastro.remover(profissional);
+  profissional = cadastroPro.remover(profissional);
   if(profissional){
     res.send({"success": "O aluno foi eliminado da face da terra"});
   }else{
@@ -130,11 +129,20 @@ app.delete('/profissional', function (req: express.Request, res: express.Respons
 })
 app.put('/profissional', function (req: express.Request, res: express.Response) {
   var profissional: Profissional = <Profissional> req.body;
-  profissional = cadastro.atualizar(profissional);
+  profissional = cadastroPro.atualizar(profissional);
   if (profissional) {
     res.send({"success": "O aluno foi atualizado com sucesso"});
   } else {
     res.send({"failure": "O aluno não pode ser atualizado"});
+  }
+})
+app.post('/buscaProfissional', function (req: express.Request, res: express.Response) {
+  var profissional : Profissional = <Profissional> req.body; 
+  var profissionaisBuscados = cadastroPro.busca(profissional);
+  if (profissionaisBuscados.length>0) {
+    res.send(JSON.stringify(profissionaisBuscados));
+  } else {
+    res.send({"failure": "O profissional não pode ser cadastrado"});
   }
 })
 
