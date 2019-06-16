@@ -14,12 +14,62 @@ export class ProfissionalComponent implements OnInit {
    constructor(private profissionalService: ProfissionalService) {}
 
    profissional: Profissional = new Profissional();
+   resultBusca: Profissional = new Profissional();
    profissionais: Profissional[];
    cpfduplicado: boolean = false;
    detalhes: boolean = false;
+   buscaProfissional: boolean = false;
+   ProfissionalExiste: boolean = false;
+   showLessBusca():void{
+      this.buscaProfissional = false;
+   }
    showDetalhes(a: Profissional): void{
       this.detalhes = !this.detalhes;
       
+   }
+   searchPro(a:Profissional):void{
+      this.buscaProfissional = true;
+      this.resultBusca = this.profissional;
+      this.ProfissionalExiste = true;
+      this.profissionalService.atualizar(a)
+      .then(ba => {
+         if (ba) {
+            this.resultBusca = this.profissionais.find(a => a.cpf == ba.cpf);
+            if (this.resultBusca){
+               this.resultBusca.copyFrom(ba);
+            } 
+         }else{
+            this.ProfissionalExiste = false;
+         }
+      })
+      .catch(erro => alert(erro));
+   }
+   updatePacienteExpediente(a:Profissional, b: Expediente,c: string): void{
+      for(var i = 0; i<a.expedientes.length;i++){
+         if(a.expedientes[i]===b){
+            a.expedientes[i].paciente = c;
+            this.updateProfissional(a);
+            break;
+         }
+      }
+   }
+   updateProfissional(a: Profissional):void{
+      this.profissionalService.atualizar(a)
+      .then(ab=>{
+         if(ab){
+            this.profissional= new Profissional();
+         }
+      }).catch(erro=> alert(erro));
+   }
+   removerExpedienteProfissional(a:Profissional, b: Expediente):void{
+      for(var i = 0; i<a.expedientes.length;i++){
+         if(a.expedientes[i]===b){
+            a.expedientes.splice(i,1);
+            a.cancelamentos++;
+            this.updateProfissional(a);
+            break;
+         }
+      }
    }
    insertExpedienteProfissional(a: Profissional,b: Expediente): void{
       a.expedientes.push(b);

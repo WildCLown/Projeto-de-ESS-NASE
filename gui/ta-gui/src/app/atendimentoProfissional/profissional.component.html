@@ -9,7 +9,8 @@
 <tr>
    <td><label>E-mail </label></td>
    <td><input [(ngModel)]="profissional.email" ></td>
-   <td><button (click)="criarAluno(profissional)">Procurar Profissional.</button></td>
+   <td><button (click)="searchPro(profissional)">Procurar Profissional.</button></td>
+   <td><button (click)="showLessBusca()">Cancelar Procura.</button></td>
 </tr>
             <tr>
                <td><label>CPF </label></td>
@@ -19,7 +20,44 @@
                </td>
             </tr>
 </table>
-
+<table *ngIf=buscaProfissional>
+      <td><h1><label>Resultado de busca:</label></h1></td><br>
+      <table>
+         <th>Nome Profissional.</th><br>
+         <th>CPF</th><br>
+         <th>E-mail para contato.</th><br>
+         <table *ngIf=ProfissionalExiste>
+                  <td>{{resultBusca.nome}}</td><br>
+                  <td>{{resultBusca.cpf}}</td><br>
+                  <td>{{resultBusca.email}}</td><br>
+                  <td><button (click)="removerAluno(a)">Demitir</button></td>
+                  <td><button (click)="a.detalhes = !a.detalhes">Detalhes</button></td>
+                  <table *ngIf="a.detalhes">
+                        <th>Data Expediente.</th>
+                        <th>Inicio Expediente.</th>
+                        <th>Fim Expediente.</th>
+                        <th>Paciente Marcado.</th>
+                        <td><button (click)="insertExpedienteProfissional(a,profissional.expediente)">Inserir Expediente</button></td><br>
+                        <tr>
+                           <td><input [(ngModel)]="profissional.expediente.data"></td>
+                           <td><input [(ngModel)]="profissional.expediente.inicio"></td>
+                           <td><input [(ngModel)]="profissional.expediente.fim"></td>
+                           <td><input [(ngModel)]="profissional.expediente.paciente"></td>
+                        </tr>
+                        <tr *ngFor="let b of a.expedientes"> 
+                              <td>{{b.data}}</td>
+                              <td>{{b.inicio}}</td>
+                              <td>{{b.fim}}</td>
+                              <td>{{b.paciente}}</td>
+                              <td><button (click)="updatePacienteExpediente(a,b,profissional.expediente.paciente)">Atualizar Paciente</button></td>
+                              <td><button (click)="removerExpedienteProfissional(a,b)">Excluir Expediente</button></td>
+                              
+               
+                        </tr>
+                  </table>
+               </table>
+      </table>
+</table>
 <table>
 <tr *ngIf="profissionais.length > 0">
    <th>Nome Profissional.</th><br>
@@ -36,19 +74,23 @@
          <th>Data Expediente.</th>
          <th>Inicio Expediente.</th>
          <th>Fim Expediente.</th>
-         <th>Paciente Marcado.</th><br>
+         <th>Paciente Marcado.</th>
          <td><button (click)="insertExpedienteProfissional(a,profissional.expediente)">Inserir Expediente</button></td><br>
          <tr>
             <td><input [(ngModel)]="profissional.expediente.data"></td>
             <td><input [(ngModel)]="profissional.expediente.inicio"></td>
             <td><input [(ngModel)]="profissional.expediente.fim"></td>
-
+            <td><input [(ngModel)]="profissional.expediente.paciente"></td>
          </tr>
          <tr *ngFor="let b of a.expedientes"> 
-               <td>{{b.data}}</td><br>
-               <td>{{b.inicio}}</td><br>
-               <td>{{b.fim}}</td><br>
+               <td>{{b.data}}</td>
+               <td>{{b.inicio}}</td>
+               <td>{{b.fim}}</td>
                <td>{{b.paciente}}</td>
+               <td><button (click)="updatePacienteExpediente(a,b,profissional.expediente.paciente)">Atualizar Paciente</button></td>
+               <td><button (click)="removerExpedienteProfissional(a,b)">Excluir Expediente</button></td>
+               
+
          </tr>
    </table>
 </tr>
